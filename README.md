@@ -140,6 +140,30 @@ This function takes a JSCAD implementation and a serialized operation, and execu
 executeJscadOperations(jscad, operation)
 ```
 
+## Development
+
+Use Bun 1.4.5, matching the CI workflows, and the committed `bun.lock`:
+
+```sh
+bun install --frozen-lockfile --ignore-scripts
+bun run tsc --noEmit
+bun test
+bun run build
+```
+
+Dependency lifecycle scripts are not required for these checks. Review and commit
+lockfile changes when intentionally updating dependencies; CI rejects an outdated
+lockfile instead of resolving new versions.
+
+The custom `@tscircuit/jscad` 0.0.2 archive remains at its existing publisher URL.
+Its SHA-512 integrity is recorded in `bun.lock`. The archive's six files were
+compared byte-for-byte with the publisher's
+[`v0.0.2` source](https://github.com/tscircuit/jscad/tree/e63fab5a92447dc0529617f282aea4c7bcdf4ae4)
+before recording that integrity. Its SHA-256 is
+`a373c1cd056fdeeb3f88f9bb67913b2252a11d4f401307c882bba026c2b9fd6b`.
+The digest detects changes to those reviewed bytes; it is not a guarantee that
+the package has no vulnerabilities.
+
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](LICENSE) file for details.
